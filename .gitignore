@@ -1,1 +1,10 @@
+# folder with backend data and questions
 data
+
+#python envoirnments
+venv/
+.venv/
+env/
+
+
+**/__pycache__/
