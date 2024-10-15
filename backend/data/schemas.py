@@ -22,11 +22,6 @@ class Question(QuestionBase):
 class ExamBase(BaseModel):
     title: str
 
-
-class ExamCreate(ExamBase):
-    questions: List[QuestionCreate] = []
-
-
 class Exam(ExamBase):
     id: int
     questions: List[QuestionCreate] = []

@@ -1,20 +1,5 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
-
-
-def get_exams(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Exam).offset(skip).limit(limit).all()
-
-
-def create_exam(db: Session, exam: schemas.ExamCreate):
-    db_exam = models.Exam(title=exam.title)
-
-    db.add(db_exam)
-    db.commit()
-    db.refresh(db_exam)
-
-    return db_exam
-
+from .. import models, schemas
 
 def get_questions(db: Session, exam_id: int, skip: int = 0, limit: int = 100):
     return (

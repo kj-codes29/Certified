@@ -1,7 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..data import database, schemas, crud
+from ..data import database, schemas
+from ..data.respository import exam_repository as repository
 
 
 router = APIRouter(prefix="/exams", tags=["exams"])
@@ -9,9 +10,18 @@ router = APIRouter(prefix="/exams", tags=["exams"])
 
 @router.get("/", response_model=List[schemas.Exam])
 def get_all_exams(db: Session = Depends(database.get_db)):
-    return crud.get_exams(db)
+    return repository.get_exams(db)
 
 
 @router.post("/", response_model=schemas.Exam)
-def create_exam(exam: schemas.ExamCreate, db: Session = Depends(database.get_db)):
-    return crud.create_exam(db, exam)
+def create_exam(exam: schemas.ExamBase, db: Session = Depends(database.get_db)):
+    return repository.create_exam(db, exam)
+
+@router.put("/{exam_id}", response_model=schemas.Exam)
+def update_exam(exam_id: int, exam: schemas.ExamBase, db: Session = Depends(database.get_db)):
+    return repository.update_exam(db, exam_id, exam)
+
+
+@router.delete("/{exam_id}", response_model=schemas.Exam)
+def delete_exam(exam_id: int, db: Session = Depends(database.get_db)):
+    return repository.delete_exam(db, exam_id)
