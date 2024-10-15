@@ -1,9 +1,9 @@
-from typing import Union
+
 from fastapi import FastAPI
-from .data.database import Base, engine
+from .data.database import create_db_and_tables
 from .routers import exams, questions
 
-Base.metadata.create_all(engine)
+create_db_and_tables()
 
 app = FastAPI()
 

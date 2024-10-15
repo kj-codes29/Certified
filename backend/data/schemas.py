@@ -6,9 +6,12 @@ class QuestionBase(BaseModel):
     text: str
     answer: str
 
+class Question(QuestionBase):
+    id: int
+    exam_id: int
 
-class QuestionCreate(QuestionBase):
-    pass
+    class Config:
+        orm_mode = True
 
 
 class Question(QuestionBase):
@@ -24,7 +27,7 @@ class ExamBase(BaseModel):
 
 class Exam(ExamBase):
     id: int
-    questions: List[QuestionCreate] = []
+    questions: List[QuestionBase] = []
 
     class Config:
         orm_mode = True
