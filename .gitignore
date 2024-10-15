@@ -1,1 +1,15 @@
-data
+# folder with backend data and questions
+exam_data
+
+#python envoirnments
+venv/
+.venv/
+env/
+
+
+**/__pycache__/
+
+
+#sqllite db
+*.sqllite
+*.db
